@@ -1,0 +1,200 @@
+import { ArrowDown } from "lucide-react";
+import { motion } from "framer-motion";
+import batmanHero from "@/assets/batman-hero-new.jpg";
+import LightRays from "./LightRays";
+
+export const HeroSection = () => {
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <div className="w-full h-full relative">
+          <motion.img
+            src={batmanHero}
+            alt="Batman overlooking Gotham"
+            className="absolute inset-0 w-full h-full object-cover object-[65%_center]"
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 2, ease: "easeOut" }}
+          />
+        </div>
+        {/* Left gradient - covers left side more heavily */}
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/30 to-transparent" 
+             style={{ 
+               background: 'linear-gradient(to right, hsl(var(--background)) 0%, hsl(var(--background) / 0.9) 25%, transparent 50%)' 
+             }} 
+        />
+        {/* Right gradient - covers right side more heavily */}
+        <div className="absolute inset-0" 
+             style={{ 
+               background: 'linear-gradient(to left, hsl(var(--background)) 0%, hsl(var(--background) / 0.9) 12%, transparent 35%)' 
+             }} 
+        />
+        {/* Bottom gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+        
+        {/* Light Rays Effect - centered on Batman */}
+        <div className="absolute inset-0 opacity-70">
+          <LightRays
+            raysOrigin="top-center"
+            raysColor="#FFD700"
+            raysSpeed={1.5}
+            lightSpread={0.8}
+            rayLength={1.2}
+            followMouse={true}
+            mouseInfluence={0.1}
+            noiseAmount={0.1}
+            distortion={0.05}
+          />
+        </div>
+      </div>
+
+      {/* Animated particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-primary/30 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -100],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Decorative elements for right side */}
+      <div className="absolute right-12 xl:right-16 top-1/2 -translate-y-1/2 hidden lg:block z-20">
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, delay: 1.2 }}
+          className="flex flex-col gap-8"
+        >
+          {/* Vertical accent line */}
+          <div className="w-[2px] h-32 bg-gradient-to-b from-transparent via-primary to-transparent mx-auto" />
+          
+          {/* Stats/Info boxes */}
+          <motion.div 
+            className="border-2 border-primary/30 bg-background/90 backdrop-blur-md p-6 min-w-[200px]"
+            whileHover={{ scale: 1.05, borderColor: "hsl(45 100% 50% / 0.6)" }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="text-4xl font-display text-primary mb-2">24hrs</div>
+            <div className="text-sm font-body text-muted-foreground tracking-wider">DURATION</div>
+          </motion.div>
+
+          <motion.div 
+            className="border-2 border-primary/30 bg-background/90 backdrop-blur-md p-6 min-w-[200px]"
+            whileHover={{ scale: 1.05, borderColor: "hsl(45 100% 50% / 0.6)" }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="text-4xl font-display text-primary mb-2">₹35K+</div>
+            <div className="text-sm font-body text-muted-foreground tracking-wider">PRIZE POOL</div>
+          </motion.div>
+
+          <motion.div 
+            className="border-2 border-primary/30 bg-background/90 backdrop-blur-md p-6 min-w-[200px]"
+            whileHover={{ scale: 1.05, borderColor: "hsl(45 100% 50% / 0.6)" }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="text-4xl font-display text-primary mb-2">3</div>
+            <div className="text-sm font-body text-muted-foreground tracking-wider">DOMAINS</div>
+          </motion.div>
+
+          {/* Bottom vertical line */}
+          <div className="w-[2px] h-32 bg-gradient-to-b from-primary via-transparent to-transparent mx-auto" />
+        </motion.div>
+      </div>
+
+      <div className="relative z-10 container mx-auto px-6 lg:px-12 flex items-center min-h-screen">
+        <div className="max-w-xl lg:max-w-2xl pt-20 lg:pt-0">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="inline-block mb-8 px-6 py-2 border border-primary/40 rounded-none text-xs font-body text-primary tracking-[0.4em] uppercase bg-background/80 backdrop-blur-sm">
+              10TH FEBRUARY 2026
+            </span>
+          </motion.div>
+          
+          <motion.h1 
+            className="font-display leading-tight tracking-tight"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+          >
+            <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-foreground">HACK HUSTLE</span>
+            <motion.span 
+              className="block text-gradient text-4xl sm:text-5xl md:text-6xl lg:text-7xl mt-4"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              CODE KNIGHT
+            </motion.span>
+          </motion.h1>
+          
+          <motion.p 
+            className="mt-10 max-w-md text-base md:text-lg font-body text-muted-foreground/80 leading-relaxed tracking-wider"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            Saveetha Engineering College, Chennai
+          </motion.p>
+
+          <motion.div 
+            className="mt-12 flex flex-col sm:flex-row gap-4"
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+          >
+            <motion.a
+              href="#prizes"
+              className="group inline-flex items-center justify-center px-10 py-4 bg-primary text-primary-foreground font-display text-lg tracking-wider hover:scale-105 transition-transform duration-300 glow-gold"
+              whileHover={{ boxShadow: "0 0 80px hsl(45 100% 50% / 0.5)" }}
+            >
+              <span>View Prizes</span>
+            </motion.a>
+            <motion.a
+              href="#contact"
+              className="group inline-flex items-center justify-center px-10 py-4 border border-foreground/30 text-foreground font-display text-lg tracking-wider hover:border-primary hover:text-primary transition-all duration-300 bg-background/50 backdrop-blur-sm"
+              whileHover={{ borderColor: "hsl(45 100% 50%)" }}
+            >
+              <span>Register Now</span>
+            </motion.a>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <motion.div 
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+      >
+        <a href="#about" className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+          <span className="text-xs font-body tracking-[0.3em]">EXPLORE</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            <ArrowDown size={20} />
+          </motion.div>
+        </a>
+      </motion.div>
+    </section>
+  );
+};
