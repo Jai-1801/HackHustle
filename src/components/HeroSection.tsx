@@ -12,7 +12,7 @@ export const HeroSection = () => {
           <motion.img
             src={batmanHero}
             alt="Batman overlooking Gotham"
-            className="absolute inset-0 w-full h-full object-cover object-[65%_center]"
+            className="absolute inset-0 w-full h-full object-cover object-[50%_20%] sm:object-[55%_center] md:object-[60%_center] lg:object-[65%_center]"
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
             transition={{ duration: 2, ease: "easeOut" }}
